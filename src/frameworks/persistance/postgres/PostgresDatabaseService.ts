@@ -1,9 +1,10 @@
 import { DatabaseService } from "../../../application/contracts/DatabaseService";
 import { Sequelize } from 'sequelize';
 export class PostgresDatabaseService implements DatabaseService {
+    private _connection: Sequelize;
     async init(): Promise<void> {
         try {
-            const sequelize = new Sequelize({
+            this._connection = new Sequelize({
                 host: process.env.HOST,
                 port: 5432,
                 database: process.env.DATABASE,
@@ -15,10 +16,14 @@ export class PostgresDatabaseService implements DatabaseService {
                     ssl: process.env.NODE_ENV === 'development' ? false : true,
                 }
             });
-            await sequelize.authenticate();
-            console.log('Autenticado....')
+            await this._connection.authenticate();
+            console.log('Database Connected....')
         } catch (error) {
             console.error(error)
         }
+    }
+
+    get connection () {
+        return this._connection;
     }
 } 

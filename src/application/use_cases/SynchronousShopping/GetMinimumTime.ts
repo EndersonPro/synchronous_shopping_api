@@ -38,7 +38,9 @@ const getMinimiumTime = async (resultRepository: ResultRepository, options: IOpt
             result: 0
         };
 
-        // const r = await resultRepository.
+        const re = await resultRepository.find(resultModel);
+
+        if (re) return re.total;
 
         const INF = 1000000000
         let a = [];
@@ -81,7 +83,7 @@ const getMinimiumTime = async (resultRepository: ResultRepository, options: IOpt
             }
         }
         resultModel.result = ret;
-        console.log(resultModel)
+        await resultRepository.add(resultModel)
         return ret;
     } catch (error) {
         throw new Error('An error ocurred')

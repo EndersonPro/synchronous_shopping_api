@@ -26,7 +26,7 @@ export class PostgresResultRepository implements ResultRepository {
         try {
             const { n, m, k, centers, roads, result: total } = result;
             const ResultModel = Result(this.databaseService.connection, DataTypes);
-            const r = await ResultModel.create({
+            await ResultModel.create({
                 n,
                 m,
                 k,
@@ -34,7 +34,6 @@ export class PostgresResultRepository implements ResultRepository {
                 roads,
                 total
             });
-            console.log(r.toJSON());
         } catch (error) {
             console.log(error);            
         }

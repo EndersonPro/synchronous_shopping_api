@@ -1,10 +1,10 @@
 import Router from '@koa/router'
-import { argv } from 'process';
 import { SynchronousShoppingController } from '../../../controllers/SynchronousShoppingController';
+import validateField from '../middlewares/ValidateFields';
 
 export const synchronousShoppingRouter = ({ resultRepository }) => {
     const router = new Router()
     const synchronousShopping = SynchronousShoppingController(resultRepository);
-    router.get('/synchronous_shopping', synchronousShopping.getMinimumTimeSynchronousShopping);
+    router.post('/synchronous_shopping', validateField, synchronousShopping.getMinimumTimeSynchronousShopping);
     return router;
 }

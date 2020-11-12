@@ -1,4 +1,4 @@
-# Prueba tecnica FullStack - Synchronous Shopping
+# Synchronous Shopping
 
 Como generar checksum
 ```bash
